@@ -432,7 +432,10 @@ M.compile = a.void(function(param)
 	end
 
 	vim.g.compile_command = command
-	prev_dir = vim.fn.getcwd()
+	prev_dir = vim.fs.root(0, '.git')
+	if prev_dir == nil then
+	    prev_dir = vim.fn.getcwd()
+	end
 
 	runcommand(command, param.smods or {}, param.count, param.bang)
 end)
